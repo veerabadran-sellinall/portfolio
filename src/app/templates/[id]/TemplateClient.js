@@ -506,7 +506,7 @@ export default function TemplateClient({ id }) {
         </div>
         <div className="flex items-center gap-3">
           <a
-            href="/"
+            href="../../"
             className="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-mono transition-all"
           >
             ← Back to Site

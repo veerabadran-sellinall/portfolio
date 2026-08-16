@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import resumeData from "../data/resume.json";
+import profilePic from "../../public/profile.png";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -342,7 +343,7 @@ export default function Home() {
             {!imgError ? (
               <div className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
                 <img
-                  src="/profile.png"
+                  src={profilePic.src}
                   alt={personal.name}
                   onError={() => setImgError(true)}
                   className="h-full w-full object-cover object-top"
