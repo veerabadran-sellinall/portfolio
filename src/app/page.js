@@ -33,12 +33,18 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [showPhotoLightbox, setShowPhotoLightbox] = useState(false);
 
-  // Resolve base path dynamically based on hostname (GitHub Pages vs Localhost)
-  const basePath = typeof window !== "undefined" && window.location.hostname.includes("github.io") ? "/portfolio" : "";
+  // basePath is resolved ONLY on the client inside useEffect to avoid SSR race conditions.
+  // During SSR window is undefined so basePath starts as "" which would produce wrong paths.
+  const [basePath, setBasePath] = useState("");
 
-  // Load resume data dynamically
+  // Load resume data dynamically.
+  // basePath is also resolved here so it is guaranteed to run after client hydration,
+  // never during SSR. imgError is also reset so the image retries with the correct path.
   useEffect(() => {
+    const resolvedBase = window.location.hostname.includes("github.io") ? "/portfolio" : "";
+    setBasePath(resolvedBase);
     setMounted(true);
+    setImgError(false); // reset so image retries once basePath is known
     const timer = setTimeout(() => {
       setData(resumeData);
     }, 300);
