@@ -8,19 +8,10 @@ export default function TemplateClient({ id }) {
 
   const handleBackToSite = (e) => {
     e.preventDefault();
-    if (typeof window === "undefined") return;
-
-    const isGithubPages = window.location.hostname.includes("github.io");
-    const homeUrl = window.location.origin + (isGithubPages ? "/portfolio/" : "/");
-
-    if (window.opener && !window.opener.closed) {
-      // Tab was opened via window.open() — focus the original tab and close this one
-      window.opener.focus();
-      window.close();
-    } else {
-      // Tab was not opened by a script (e.g. user duplicated tab) — navigate directly
-      window.location.href = homeUrl;
-    }
+    const isGithubPages = typeof window !== "undefined" && window.location.hostname.includes("github.io");
+    window.location.href = isGithubPages
+      ? "https://veerabadran-sellinall.github.io/portfolio/"
+      : "/";
   };
 
   // Auto trigger browser print preview on load
