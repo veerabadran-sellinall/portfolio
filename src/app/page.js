@@ -66,6 +66,8 @@ export default function Home() {
   }
 
   const { personal, workExperience, education, skills, languages } = data;
+  const profileThumbSrc = personal.photoUrl || `${basePath}/profile-thumb.png`;
+  const profileFullSrc = personal.photoUrl || `${basePath}/profile.png`;
 
   // Flattened skills with categories for searching
   const allSkillsFlat = Object.entries(skills).flatMap(([category, skillList]) =>
@@ -351,7 +353,7 @@ export default function Home() {
                 className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none cursor-zoom-in hover:scale-105 transition-all duration-300"
               >
                 <img
-                  src={`${basePath}/profile.png`}
+                  src={profileThumbSrc}
                   alt={personal.name}
                   onError={() => setImgError(true)}
                   onContextMenu={(e) => e.preventDefault()}
@@ -884,7 +886,7 @@ export default function Home() {
               ✕
             </button>
             <img
-              src={`${basePath}/profile.png`}
+              src={profileFullSrc}
               alt={personal.name}
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
