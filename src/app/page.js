@@ -33,8 +33,8 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [showPhotoLightbox, setShowPhotoLightbox] = useState(false);
 
-  // Resolve base path dynamically for asset loading under subdirectory hosting (GitHub Pages)
-  const basePath = typeof window !== "undefined" && window.location.pathname.startsWith("/portfolio") ? "/portfolio" : "";
+  // Resolve base path dynamically based on hostname (GitHub Pages vs Localhost)
+  const basePath = typeof window !== "undefined" && window.location.hostname.includes("github.io") ? "/portfolio" : "";
 
   // Load resume data dynamically
   useEffect(() => {
