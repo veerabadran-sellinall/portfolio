@@ -1,0 +1,101 @@
+{
+  "personal": {
+    "name": "Veerabadran V",
+    "title": "Lead Engineer, Product & Engineering",
+    "location": "Coimbatore, Tamil Nadu 638461",
+    "email": "sandboxveera@gmail.com",
+    "phone": "+91 90801 33317",
+    "linkedin": "https://linkedin.com",
+    "summary": "Dedicated Lead Engineer specializing in Product & Engineering, currently based in Coimbatore. With a solid background in application support, troubleshooting, and enterprise software management, I bring a wealth of technical expertise to the table. My skills encompass programming languages such as Java and Python, along with web technologies like HTML and CSS. I am also proficient in database management with MongoDB and SQL, and I have experience with messaging systems like RabbitMQ. My role involves not just technical tasks but also team and client management, ensuring that I provide active support and efficient debugging to optimize software performance. I am passionate about leveraging technology to solve problems and improve processes, and I thrive in collaborative environments where I can lead teams to success."
+  },
+  "workExperience": [
+    {
+      "role": "Lead Engineer, Product & Engineering",
+      "company": "GRAAS",
+      "location": "Coimbatore, Tamil Nadu",
+      "type": "Full-time",
+      "period": "November 2020 to Present",
+      "noticePeriod": "2 months",
+      "responsibilities": [
+        {
+          "title": "Team Management",
+          "description": "I lead a team of engineers, ensuring that everyone is aligned with our goals and objectives. I foster a collaborative environment where team members feel valued and motivated to contribute their best work."
+        },
+        {
+          "title": "Jira Tracking",
+          "description": "I actively manage our project tracking using Jira, ensuring that tasks are updated and followed up on promptly. This helps us stay organized and meet our deadlines effectively."
+        },
+        {
+          "title": "Issue Tracking and Root Cause Analysis",
+          "description": "I am responsible for identifying issues within our applications, conducting thorough root cause analyses, and implementing solutions to prevent future occurrences."
+        },
+        {
+          "title": "Bug Fixing",
+          "description": "I take a hands-on approach to debugging, working diligently to resolve software bugs and improve overall system performance."
+        },
+        {
+          "title": "Automation Creation",
+          "description": "I develop automation scripts and batches to streamline daily tasks, which enhances productivity and reduces manual effort."
+        },
+        {
+          "title": "Monitoring",
+          "description": "I oversee RabbitMQ and log monitoring to ensure that our systems are running smoothly and efficiently."
+        },
+        {
+          "title": "Customer Support",
+          "description": "I provide responsive customer support, including assistance via Slack, ensuring that our clients receive timely help and guidance."
+        },
+        {
+          "title": "Sales Day Support",
+          "description": "I offer dedicated support during peak sales days for various marketplaces, including Shopee, Lazada, Zalora, and Shopify, ensuring that our operations run seamlessly during high-traffic periods."
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Technology in Applied Electronics",
+      "institution": "Vinayaka Mission's Research Foundation",
+      "location": "Salem, Tamil Nadu",
+      "type": "Part-time",
+      "period": "January 2016 to May 2018",
+      "score": "8.833"
+    },
+    {
+      "degree": "Bachelor of Technology in Electronics and Communication Engineering",
+      "institution": "VTU",
+      "location": "Belgaum, Karnataka",
+      "type": "Full-time",
+      "period": "August 2010 to August 2015",
+      "score": "58%"
+    },
+    {
+      "degree": "Higher Secondary Education",
+      "institution": "MCS Science PU College",
+      "location": "Chamrajnagar, Karnataka",
+      "type": "State Board Karnataka | English Medium",
+      "period": "Passing Year: 2010",
+      "score": "55.5%"
+    },
+    {
+      "degree": "Secondary Education",
+      "institution": "Govt HS Chikkahalli",
+      "location": "Tamil Nadu",
+      "type": "State Board Tamil Nadu | Kannada Medium",
+      "period": "Passing Year: 2007",
+      "score": "73.4%"
+    }
+  ],
+  "skills": {
+    "Technical Skills": ["Java", "Python", "Spring Boot", "SQL", "MongoDB", "RabbitMQ", "HTML", "CSS"],
+    "Project Management": ["Jira", "Issue Tracking", "Risk & Issue Management"],
+    "Soft Skills": ["Leadership", "Communication", "Customer Service", "Problem-Solving", "Organizational Skills"],
+    "Tools": ["Microsoft Office", "Manual Testing"]
+  },
+  "languages": [
+    { "name": "Kannada", "level": "Native" },
+    { "name": "Telugu", "level": "Intermediate" },
+    { "name": "Tamil", "level": "Native" },
+    { "name": "English", "level": "Fluent" }
+  ]
+}

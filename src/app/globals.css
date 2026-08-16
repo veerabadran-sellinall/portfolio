@@ -1,26 +1,167 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-primary: #0ea5e9;    /* Electric Cyan */
+  --color-brand-secondary: #06b6d4;  /* Bright Teal */
+  --color-brand-accent: #10b981;     /* Emerald Green */
+  --color-dark-bg: #0b0f17;          /* Steel Slate Black */
+  --color-dark-card: #151e2d;        /* Deep Charcoal Slate */
+  --color-dark-border: #1e293b;      /* Slate Blue Border */
+  --color-accent-glow: rgba(14, 165, 233, 0.15);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b0f17;
+  --foreground: #f8fafc;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0f17;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Animations */
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: rgba(14, 165, 233, 0.2);
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.05);
+  }
+  50% {
+    border-color: rgba(20, 184, 166, 0.4);
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.15);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-border-glow {
+  animation: borderGlow 6s infinite ease-in-out;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 8s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 5s infinite ease-in-out;
+}
+
+/* Premium Recruiter Cockpit Panels */
+.recruiter-panel {
+  background: rgba(21, 30, 45, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 41, 59, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.recruiter-panel:hover {
+  border-color: rgba(14, 165, 233, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Print Stylesheet overrides for PDF Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    font-size: 12pt !important;
+  }
+
+  /* Force light backgrounds & borders on containers */
+  .recruiter-panel, .glass-panel {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    color: #111827 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Typography color overrides for ink saving and high contrast */
+  h1, h2, h3, h4, p, span, a, label {
+    color: #111827 !important;
+    text-shadow: none !important;
+  }
+
+  .text-zinc-400, .text-zinc-500, .text-zinc-600 {
+    color: #4b5563 !important;
+  }
+
+  /* Accents */
+  .text-cyan-400, .text-emerald-400, .text-teal-400 {
+    color: #0369a1 !important; /* Darker blue to remain visible and readable on white background */
+    font-weight: bold !important;
+  }
+
+  /* Prevent sections and elements from breaking midway across PDF pages */
+  section, 
+  .grid > div,
+  #experience > div,
+  #education div,
+  #skills div {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Page break helpers */
+  .page-break-before {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  /* Force display of hidden data columns on print */
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:grid {
+    display: grid !important;
+  }
+}
+
+/* Custom text selection styling that respects contrast in both light and dark mode */
+::selection {
+  background-color: rgba(14, 165, 233, 0.25) !important;
+  color: inherit !important;
 }
