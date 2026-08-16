@@ -6,6 +6,21 @@ import resumeData from "../../../data/resume.json";
 export default function TemplateClient({ id }) {
   const { personal, workExperience, education, skills, languages } = resumeData;
 
+  const handleBackToSite = (e) => {
+    e.preventDefault();
+    // Since the template was opened in a new tab/window, close it to return to the original tab
+    if (typeof window !== "undefined") {
+      try {
+        window.close();
+      } catch (err) {
+        // Fallback: If browser prevents closing, redirect to the correct home URL
+        const isGithubPages = window.location.pathname.startsWith('/portfolio');
+        const homeUrl = window.location.origin + (isGithubPages ? '/portfolio/' : '/');
+        window.location.href = homeUrl;
+      }
+    }
+  };
+
   // Auto trigger browser print preview on load
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -505,12 +520,12 @@ export default function TemplateClient({ id }) {
           <p className="text-[10px] text-zinc-400">Select template style & click Print below. (Fits standard A4 paper sizes)</p>
         </div>
         <div className="flex items-center gap-3">
-          <a
-            href="../../"
-            className="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-mono transition-all"
+          <button
+            onClick={handleBackToSite}
+            className="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-xs font-mono transition-all cursor-pointer"
           >
             ← Back to Site
-          </a>
+          </button>
           <button
             onClick={() => window.print()}
             className="px-4 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-slate-950 text-xs font-mono font-bold transition-all shadow-md cursor-pointer"
