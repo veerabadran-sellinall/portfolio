@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import resumeData from "../data/resume.json";
-import profilePic from "../../public/profile.png";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -31,6 +30,9 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState("");
   const [showPDFModal, setShowPDFModal] = useState(false);
   const [imgError, setImgError] = useState(false);
+
+  // Resolve base path dynamically for asset loading under subdirectory hosting (GitHub Pages)
+  const basePath = typeof window !== "undefined" && window.location.pathname.startsWith("/portfolio") ? "/portfolio" : "";
 
   // Load resume data dynamically
   useEffect(() => {
@@ -343,7 +345,7 @@ export default function Home() {
             {!imgError ? (
               <div className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
                 <img
-                  src={profilePic.src}
+                  src={`${basePath}/profile.png`}
                   alt={personal.name}
                   onError={() => setImgError(true)}
                   className="h-full w-full object-cover object-top"
@@ -831,7 +833,7 @@ export default function Home() {
                 <button
                   key={template.id}
                   onClick={() => {
-                    window.open(`templates/${template.id}`, "_blank");
+                    window.open(`${basePath}/templates/${template.id}`, "_blank");
                     setShowPDFModal(false);
                   }}
                   className={`w-full text-left p-4 rounded-xl border flex items-center justify-between group transition-all cursor-pointer ${isDark
