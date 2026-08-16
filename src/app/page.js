@@ -30,12 +30,14 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState("");
   const [showPDFModal, setShowPDFModal] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Resolve base path dynamically for asset loading under subdirectory hosting (GitHub Pages)
   const basePath = typeof window !== "undefined" && window.location.pathname.startsWith("/portfolio") ? "/portfolio" : "";
 
   // Load resume data dynamically
   useEffect(() => {
+    setMounted(true);
     const timer = setTimeout(() => {
       setData(resumeData);
     }, 300);
@@ -342,7 +344,7 @@ export default function Home() {
         {/* Hero visual graphic representation */}
         <div className="w-full lg:w-96 flex justify-center print:hidden">
           <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
-            {!imgError ? (
+            {mounted && !imgError ? (
               <div className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
                 <img
                   src={`${basePath}/profile.png`}
