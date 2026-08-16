@@ -340,16 +340,16 @@ export default function Home() {
         <div className="w-full lg:w-96 flex justify-center print:hidden">
           <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
             {!imgError ? (
-              <div className="h-24 w-24 rounded-full overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
+              <div className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
                 <img
                   src="/profile.png"
                   alt={personal.name}
                   onError={() => setImgError(true)}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-top"
                 />
               </div>
             ) : (
-              <div className="h-24 w-24 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 text-4xl font-mono font-extrabold mb-6 shadow-lg select-none">
+              <div className="h-28 w-28 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 text-4xl font-mono font-extrabold mb-6 shadow-lg select-none">
                 VV
               </div>
             )}
