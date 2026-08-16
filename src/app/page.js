@@ -66,8 +66,8 @@ export default function Home() {
   }
 
   const { personal, workExperience, education, skills, languages } = data;
-  const profileThumbSrc = personal.photoUrl || `${basePath}/profile-thumb.png`;
-  const profileFullSrc = personal.photoUrl || `${basePath}/profile.png`;
+  const profileThumbSrc = personal.photoUrl || `${basePath}/profile-thumb.png?v=1.0.3`;
+  const profileFullSrc = personal.photoUrl || `${basePath}/profile.png?v=1.0.3`;
 
   // Flattened skills with categories for searching
   const allSkillsFlat = Object.entries(skills).flatMap(([category, skillList]) =>
