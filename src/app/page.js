@@ -843,7 +843,7 @@ export default function Home() {
                 <button
                   key={template.id}
                   onClick={() => {
-                    window.open(`${basePath}/templates/${template.id}`, "_blank");
+                    window.open(`${basePath}/templates/${template.id}?v=1.0.4`, "_blank");
                     setShowPDFModal(false);
                   }}
                   className={`w-full text-left p-4 rounded-xl border flex items-center justify-between group transition-all cursor-pointer ${isDark
