@@ -13,7 +13,7 @@ export default function Home() {
     { type: "system", text: "Veerabadran V Interactive Profile Terminal v1.1.0" },
     { type: "system", text: "Type 'help' or click commands below to query my data." }
   ]);
-  
+
   // Theme state: "dark" or "light"
   const [theme, setTheme] = useState("dark");
 
@@ -29,6 +29,7 @@ export default function Home() {
   // Toast / Download simulation state
   const [toastMessage, setToastMessage] = useState("");
   const [showPDFModal, setShowPDFModal] = useState(false);
+  const [imgError, setImgError] = useState();
 
   // Load resume data dynamically
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function Home() {
   const { personal, workExperience, education, skills, languages } = data;
 
   // Flattened skills with categories for searching
-  const allSkillsFlat = Object.entries(skills).flatMap(([category, skillList]) => 
+  const allSkillsFlat = Object.entries(skills).flatMap(([category, skillList]) =>
     skillList.map(skill => ({ name: skill, category }))
   );
 
@@ -174,12 +175,12 @@ export default function Home() {
     e.preventDefault();
     setSubmitting(true);
     const textMsg = `Hello Veerabadran,\n\nMy name is ${contactForm.name} (${contactForm.email}).\n\nSubject: ${contactForm.subject}\n\nMessage: ${contactForm.message}`;
-    
+
     setTimeout(() => {
       setSubmitting(false);
       setFormSubmitted(true);
       setToastMessage("Direct link launched successfully!");
-      
+
       if (communicationMode === "whatsapp") {
         const waUrl = `https://wa.me/919080133317?text=${encodeURIComponent(textMsg)}`;
         window.open(waUrl, "_blank");
@@ -204,7 +205,7 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen ${bgClass} flex flex-col relative print:bg-white print:text-black`}>
-      
+
       {/* Toast Alert Indicator */}
       {toastMessage && (
         <div className="fixed bottom-5 right-5 z-[100] bg-cyan-900/90 text-cyan-200 border border-cyan-500/30 px-4 py-3 rounded-xl shadow-2xl backdrop-blur-md flex items-center gap-2 animate-bounce print:hidden">
@@ -242,7 +243,7 @@ export default function Home() {
             <a href="#education" className={`hover:text-cyan-500 transition-colors ${!isDark && "text-slate-600"}`}>Education</a>
             <a href="#terminal" className={`hover:text-cyan-500 transition-colors ${!isDark && "text-slate-600"}`}>Console</a>
             <a href="#contact" className={`hover:text-cyan-500 transition-colors ${!isDark && "text-slate-600"}`}>Contact</a>
-            
+
             {/* Theme Toggle Button */}
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
@@ -260,11 +261,10 @@ export default function Home() {
               )}
             </button>
 
-            <button 
+            <button
               onClick={handleExportPDF}
-              className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border font-semibold transition-all cursor-pointer ${
-                isDark ? "bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border-cyan-500/30" : "bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border-cyan-200"
-              }`}
+              className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border font-semibold transition-all cursor-pointer ${isDark ? "bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border-cyan-500/30" : "bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border-cyan-200"
+                }`}
             >
               PDF Resume
             </button>
@@ -313,7 +313,7 @@ export default function Home() {
           <p className={`${textMutedClass} max-w-2xl leading-relaxed text-sm sm:text-base`}>
             {personal.summary}
           </p>
-          
+
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm font-mono pt-2 print:flex-col print:items-start">
             <div className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border ${badgeClass}`}>
               <svg className="h-4 w-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -339,9 +339,20 @@ export default function Home() {
         {/* Hero visual graphic representation */}
         <div className="w-full lg:w-96 flex justify-center print:hidden">
           <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
-            <div className="h-24 w-24 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 text-4xl font-mono font-extrabold mb-6 shadow-lg">
-              VV
-            </div>
+            {!imgError ? (
+              <div className="h-24 w-24 rounded-full overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
+                <img
+                  src="/profile.png"
+                  alt={personal.name}
+                  onError={() => setImgError(true)}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="h-24 w-24 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 text-4xl font-mono font-extrabold mb-6 shadow-lg select-none">
+                VV
+              </div>
+            )}
             <h3 className={`text-xl font-bold tracking-wide ${textTitleClass}`}>{personal.name}</h3>
             <p className={`text-xs font-mono mt-1 ${textSubtitleClass}`}>Lead Engineer | Tech Innovator</p>
             <div className="flex gap-2.5 mt-6 flex-wrap justify-center">
@@ -375,7 +386,7 @@ export default function Home() {
                 ? (isDark ? "bg-cyan-500/10 border-cyan-500/30" : "bg-cyan-50/50 border-cyan-300")
                 : (isDark ? "bg-white/5 border-zinc-800 hover:bg-zinc-800/40" : "bg-white border-slate-200 hover:bg-slate-50");
               return (
-                <div 
+                <div
                   key={fq.id}
                   onClick={() => setActiveFitQuestion(isSelected ? null : fq.id)}
                   className={`p-4 rounded-xl border text-left cursor-pointer transition-all duration-300 ${fqCardClass}`}
@@ -407,7 +418,7 @@ export default function Home() {
             <div className={`absolute top-0 right-0 px-4 py-2 border-l border-b ${borderClass} rounded-bl-xl text-xs font-mono ${textSubtitleClass} print:hidden`}>
               Notice Period: {exp.noticePeriod}
             </div>
-            
+
             <div className="space-y-2">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h3 className={`text-xl sm:text-2xl font-bold ${textTitleClass}`}>{exp.role}</h3>
@@ -436,7 +447,7 @@ export default function Home() {
                   ? (isDark ? "bg-cyan-500/5 border-cyan-500/30" : "bg-cyan-50/20 border-cyan-200")
                   : (isDark ? "bg-white/5 border-zinc-800 hover:bg-zinc-800/40" : "bg-white border-slate-200 hover:bg-slate-50 print:border-none");
                 return (
-                  <div 
+                  <div
                     key={rIdx}
                     className={`rounded-xl border transition-all duration-300 cursor-pointer print:cursor-default ${respCardClass}`}
                     onClick={() => setExpandedResponsibility(isExpanded ? null : rIdx)}
@@ -446,8 +457,8 @@ export default function Home() {
                         <span className="h-2 w-2 rounded-full bg-cyan-500"></span>
                         <span className={`font-semibold text-xs sm:text-sm ${textTitleClass}`}>{resp.title}</span>
                       </div>
-                      <svg 
-                        className={`h-4 w-4 text-zinc-500 transition-transform print:hidden ${isExpanded ? "rotate-180 text-cyan-500" : ""}`} 
+                      <svg
+                        className={`h-4 w-4 text-zinc-500 transition-transform print:hidden ${isExpanded ? "rotate-180 text-cyan-500" : ""}`}
                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -493,11 +504,10 @@ export default function Home() {
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                activeTab === cat
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === cat
                   ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/10"
                   : (isDark ? "bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200")
-              }`}
+                }`}
             >
               {cat === "all" ? "All Skills" : cat}
             </button>
@@ -518,7 +528,7 @@ export default function Home() {
                 </span>
               </div>
               <div className="w-full bg-zinc-800/40 rounded-full h-1 print:hidden">
-                <div 
+                <div
                   className="bg-gradient-to-r from-cyan-500 to-emerald-500 h-1 rounded-full"
                   style={{ width: skill.category === "Technical Skills" ? "90%" : "75%" }}
                 ></div>
@@ -543,8 +553,8 @@ export default function Home() {
           </h2>
           <div className="space-y-6">
             {education.map((edu, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`${panelClass} rounded-xl p-5 sm:p-6 space-y-3 print:border-none print:shadow-none print:p-0`}
               >
                 <div className="flex flex-wrap justify-between items-start gap-2">
@@ -582,10 +592,10 @@ export default function Home() {
                   <div
                     className="bg-gradient-to-r from-cyan-500 to-emerald-500 h-1.5 rounded-full"
                     style={{
-                      width: 
-                        lang.level === "Native" ? "100%" : 
-                        lang.level === "Fluent" ? "90%" : 
-                        lang.level === "Intermediate" ? "65%" : "50%"
+                      width:
+                        lang.level === "Native" ? "100%" :
+                          lang.level === "Fluent" ? "90%" :
+                            lang.level === "Intermediate" ? "65%" : "50%"
                     }}
                   ></div>
                 </div>
@@ -627,13 +637,13 @@ export default function Home() {
           </div>
           <div className="p-4 space-y-2 h-56 overflow-y-auto bg-[#0d1117]">
             {terminalHistory.map((item, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className={
                   item.type === "user" ? "text-cyan-400 animate-pulse" :
-                  item.type === "error" ? "text-rose-400" :
-                  item.type === "system" ? "text-zinc-400 font-semibold" : 
-                  "text-zinc-200"
+                    item.type === "error" ? "text-rose-400" :
+                      item.type === "system" ? "text-zinc-400 font-semibold" :
+                        "text-zinc-200"
                 }
               >
                 {item.text}
@@ -644,7 +654,7 @@ export default function Home() {
           <div className="px-4 py-2 bg-[#090d13] border-t border-zinc-800 flex flex-wrap gap-2 items-center">
             <span className="text-[10px] text-zinc-500 uppercase tracking-wider">Quick Query:</span>
             {["summary", "skills", "experience", "contact"].map(cmd => (
-              <button 
+              <button
                 key={cmd}
                 onClick={() => executeQuickCommand(cmd)}
                 className="px-2 py-1 rounded bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 text-[10px] font-mono border border-cyan-500/20 cursor-pointer"
@@ -680,11 +690,10 @@ export default function Home() {
             <button
               type="button"
               onClick={() => setCommunicationMode("email")}
-              className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-                communicationMode === "email"
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 cursor-pointer ${communicationMode === "email"
                   ? "bg-cyan-500 text-slate-950 shadow-md"
                   : (isDark ? "bg-white/5 text-zinc-400 hover:bg-white/10" : "bg-slate-100 text-slate-600 hover:bg-slate-200")
-              }`}
+                }`}
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -694,14 +703,13 @@ export default function Home() {
             <button
               type="button"
               onClick={() => setCommunicationMode("whatsapp")}
-              className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 cursor-pointer ${
-                communicationMode === "whatsapp"
+              className={`px-4 py-2 rounded-xl text-xs font-mono font-semibold transition-all flex items-center gap-2 cursor-pointer ${communicationMode === "whatsapp"
                   ? "bg-emerald-500 text-slate-950 shadow-md"
                   : (isDark ? "bg-white/5 text-zinc-400 hover:bg-white/10" : "bg-slate-100 text-slate-600 hover:bg-slate-200")
-              }`}
+                }`}
             >
               <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.489 0 9.951-4.447 9.954-9.899.001-2.64-1.019-5.123-2.873-6.981-1.855-1.857-4.329-2.88-6.963-2.881-5.5 0-9.96 4.448-9.963 9.901-.001 1.869.52 3.693 1.509 5.298l-.99 3.613 3.73-.977zm11.362-7.054c-.302-.15-1.785-.88-2.062-.98-.276-.1-.478-.15-.678.15-.2.3-.778.98-.95 1.18-.172.2-.345.224-.648.075-.302-.15-1.276-.47-2.43-1.499-.896-.8-1.5-1.787-1.677-2.088-.177-.3-.018-.463.13-.61.137-.133.302-.35.454-.524.15-.174.2-.3.302-.5.101-.2.05-.376-.026-.525-.075-.15-.678-1.636-.93-2.247-.244-.588-.492-.51-.678-.52-.175-.007-.375-.009-.575-.009-.2 0-.527.075-.803.376-.277.3-1.055 1.03-1.055 2.515s1.08 2.916 1.23 3.116c.15.2 2.126 3.248 5.15 4.554.72.31 1.28.497 1.72.637.72.23 1.38.197 1.9.12.58-.087 1.787-.73 2.037-1.436.25-.706.25-1.31.175-1.436-.075-.12-.276-.197-.577-.347z"/>
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.625 1.451 5.489 0 9.951-4.447 9.954-9.899.001-2.64-1.019-5.123-2.873-6.981-1.855-1.857-4.329-2.88-6.963-2.881-5.5 0-9.96 4.448-9.963 9.901-.001 1.869.52 3.693 1.509 5.298l-.99 3.613 3.73-.977zm11.362-7.054c-.302-.15-1.785-.88-2.062-.98-.276-.1-.478-.15-.678.15-.2.3-.778.98-.95 1.18-.172.2-.345.224-.648.075-.302-.15-1.276-.47-2.43-1.499-.896-.8-1.5-1.787-1.677-2.088-.177-.3-.018-.463.13-.61.137-.133.302-.35.454-.524.15-.174.2-.3.302-.5.101-.2.05-.376-.026-.525-.075-.15-.678-1.636-.93-2.247-.244-.588-.492-.51-.678-.52-.175-.007-.375-.009-.575-.009-.2 0-.527.075-.803.376-.277.3-1.055 1.03-1.055 2.515s1.08 2.916 1.23 3.116c.15.2 2.126 3.248 5.15 4.554.72.31 1.28.497 1.72.637.72.23 1.38.197 1.9.12.58-.087 1.787-.73 2.037-1.436.25-.706.25-1.31.175-1.436-.075-.12-.276-.197-.577-.347z" />
               </svg>
               WhatsApp Channel
             </button>
@@ -716,14 +724,13 @@ export default function Home() {
               <p className={`text-xs max-w-sm mx-auto ${textMutedClass}`}>
                 Your message has been processed successfully. Veerabadran will get in touch with you shortly.
               </p>
-              <button 
+              <button
                 onClick={() => {
                   setContactForm(prev => ({ ...prev, subject: "", message: "" }));
                   setFormSubmitted(false);
                 }}
-                className={`mt-4 px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer ${
-                  isDark ? "bg-white/5 border border-zinc-850 hover:bg-white/10" : "bg-slate-100 border border-slate-200 hover:bg-slate-200"
-                }`}
+                className={`mt-4 px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer ${isDark ? "bg-white/5 border border-zinc-850 hover:bg-white/10" : "bg-slate-100 border border-slate-200 hover:bg-slate-200"
+                  }`}
               >
                 Send Another Message
               </button>
@@ -779,11 +786,10 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={submitting}
-                className={`w-full py-3 rounded-xl font-bold transition-all shadow-md disabled:opacity-50 cursor-pointer text-slate-950 ${
-                  communicationMode === "whatsapp" 
-                    ? "bg-emerald-500 hover:bg-emerald-600" 
+                className={`w-full py-3 rounded-xl font-bold transition-all shadow-md disabled:opacity-50 cursor-pointer text-slate-950 ${communicationMode === "whatsapp"
+                    ? "bg-emerald-500 hover:bg-emerald-600"
                     : "bg-cyan-600 hover:bg-cyan-700"
-                }`}
+                  }`}
               >
                 {submitting ? "Processing Link..." : communicationMode === "whatsapp" ? "Launch WhatsApp Chat" : "Launch Email Client"}
               </button>
@@ -827,11 +833,10 @@ export default function Home() {
                     window.open(`/templates/${template.id}`, "_blank");
                     setShowPDFModal(false);
                   }}
-                  className={`w-full text-left p-4 rounded-xl border flex items-center justify-between group transition-all cursor-pointer ${
-                    isDark
+                  className={`w-full text-left p-4 rounded-xl border flex items-center justify-between group transition-all cursor-pointer ${isDark
                       ? "bg-white/5 border-zinc-800 hover:bg-zinc-800/40 hover:border-cyan-500/50"
                       : "bg-slate-50 border-slate-200 hover:bg-slate-100 hover:border-cyan-500/50"
-                  }`}
+                    }`}
                 >
                   <div className="space-y-0.5">
                     <span className={`font-semibold text-sm ${textTitleClass} group-hover:text-cyan-500 transition-colors`}>

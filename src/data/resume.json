@@ -87,15 +87,58 @@
     }
   ],
   "skills": {
-    "Technical Skills": ["Java", "Python", "Spring Boot", "SQL", "MongoDB", "RabbitMQ", "HTML", "CSS"],
-    "Project Management": ["Jira", "Issue Tracking", "Risk & Issue Management"],
-    "Soft Skills": ["Leadership", "Communication", "Customer Service", "Problem-Solving", "Organizational Skills"],
-    "Tools": ["Microsoft Office", "Manual Testing"]
+    "Technical Skills": [
+      "Java",
+      "Python",
+      "Spring Boot",
+      "SQL",
+      "MongoDB",
+      "RabbitMQ",
+      "HTML",
+      "CSS"
+    ],
+    "Project Management": [
+      "Jira",
+      "Issue Tracking",
+      "Risk & Issue Management"
+    ],
+    "Soft Skills": [
+      "Leadership",
+      "Communication",
+      "Customer Service",
+      "Problem-Solving",
+      "Organizational Skills"
+    ],
+    "Tools": [
+      "Postman",
+      "VS Code",
+      "Antigravity",
+      "Grafana",
+      "Zendesk",
+      "GitHub",
+      "Bitbucket",
+      "Microsoft Office",
+      "Manual Testing",
+      "Last9",
+      "Papertrail"
+    ]
   },
   "languages": [
-    { "name": "Kannada", "level": "Native" },
-    { "name": "Telugu", "level": "Intermediate" },
-    { "name": "Tamil", "level": "Native" },
-    { "name": "English", "level": "Fluent" }
+    {
+      "name": "Kannada",
+      "level": "Native"
+    },
+    {
+      "name": "Telugu",
+      "level": "Intermediate"
+    },
+    {
+      "name": "Tamil",
+      "level": "Native"
+    },
+    {
+      "name": "English",
+      "level": "Fluent"
+    }
   ]
 }
