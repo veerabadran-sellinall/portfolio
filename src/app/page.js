@@ -31,6 +31,7 @@ export default function Home() {
   const [showPDFModal, setShowPDFModal] = useState(false);
   const [imgError, setImgError] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showPhotoLightbox, setShowPhotoLightbox] = useState(false);
 
   // Resolve base path dynamically for asset loading under subdirectory hosting (GitHub Pages)
   const basePath = typeof window !== "undefined" && window.location.pathname.startsWith("/portfolio") ? "/portfolio" : "";
@@ -345,12 +346,17 @@ export default function Home() {
         <div className="w-full lg:w-96 flex justify-center print:hidden">
           <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
             {mounted && !imgError ? (
-              <div className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none">
+              <div 
+                onClick={() => setShowPhotoLightbox(true)}
+                className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none cursor-zoom-in hover:scale-105 transition-all duration-300"
+              >
                 <img
                   src={`${basePath}/profile.png`}
                   alt={personal.name}
                   onError={() => setImgError(true)}
-                  className="h-full w-full object-cover object-top"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                  className="h-full w-full object-cover object-top select-none pointer-events-none"
                 />
               </div>
             ) : (
@@ -857,6 +863,34 @@ export default function Home() {
                 </button>
               ))}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Photo Lightbox Modal with Copy Protection */}
+      {showPhotoLightbox && (
+        <div 
+          onClick={() => setShowPhotoLightbox(false)}
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 cursor-zoom-out"
+        >
+          <div className="relative max-w-sm w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 p-1.5 bg-zinc-950 flex flex-col justify-center animate-fade-in">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowPhotoLightbox(false);
+              }}
+              className="absolute top-4 right-4 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 rounded-full h-8 w-8 flex items-center justify-center font-mono text-sm cursor-pointer z-10"
+            >
+              ✕
+            </button>
+            <img
+              src={`${basePath}/profile.png`}
+              alt={personal.name}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full h-auto object-contain rounded-xl select-none pointer-events-none"
+            />
           </div>
         </div>
       )}
