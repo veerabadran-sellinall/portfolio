@@ -29,7 +29,7 @@ export default function Home() {
   // Toast / Download simulation state
   const [toastMessage, setToastMessage] = useState("");
   const [showPDFModal, setShowPDFModal] = useState(false);
-  const [imgError, setImgError] = useState();
+  const [imgError, setImgError] = useState(false);
 
   // Load resume data dynamically
   useEffect(() => {
