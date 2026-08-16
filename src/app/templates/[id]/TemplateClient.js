@@ -8,16 +8,15 @@ export default function TemplateClient({ id }) {
 
   const handleBackToSite = (e) => {
     e.preventDefault();
-    // Since the template was opened in a new tab/window, close it to return to the original tab
     if (typeof window !== "undefined") {
-      try {
-        window.close();
-      } catch (err) {
-        // Fallback: If browser prevents closing, redirect to the correct home URL
-        const isGithubPages = window.location.pathname.startsWith('/portfolio');
+      window.close();
+      
+      // Fallback: If window.close() is blocked by browser security, redirect after a short delay
+      setTimeout(() => {
+        const isGithubPages = window.location.hostname.includes("github.io");
         const homeUrl = window.location.origin + (isGithubPages ? '/portfolio/' : '/');
         window.location.href = homeUrl;
-      }
+      }, 150);
     }
   };
 
