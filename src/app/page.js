@@ -37,18 +37,17 @@ export default function Home() {
   // During SSR window is undefined so basePath starts as "" which would produce wrong paths.
   const [basePath, setBasePath] = useState("");
 
-  // Load resume data dynamically.
-  // basePath is also resolved here so it is guaranteed to run after client hydration,
-  // never during SSR. imgError is also reset so the image retries with the correct path.
+  // All state is resolved synchronously in one useEffect batch after client hydration.
+  // resumeData is a local JSON import (already in memory) so no async delay is needed.
+  // Batching all setState calls together means React does a single re-render with the
+  // correct basePath, mounted=true, and data — eliminating any timing window where
+  // basePath="" while mounted=true could cause a wrong image path to fire.
   useEffect(() => {
     const resolvedBase = window.location.hostname.includes("github.io") ? "/portfolio" : "";
     setBasePath(resolvedBase);
     setMounted(true);
-    setImgError(false); // reset so image retries once basePath is known
-    const timer = setTimeout(() => {
-      setData(resumeData);
-    }, 300);
-    return () => clearTimeout(timer);
+    setImgError(false);
+    setData(resumeData);
   }, []);
 
   // Clear toast after 3 seconds
