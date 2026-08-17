@@ -285,27 +285,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Recruiter Quick Scan Summary Grid */}
-      <section className={`${isDark ? "bg-slate-900/60 border-b border-zinc-800/60" : "bg-slate-100/80 border-b border-slate-200"} py-4 px-6 print:hidden`}>
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 text-center sm:text-left">
-          <div className={`pr-4 ${isDark ? "border-r border-zinc-800" : "border-r border-slate-200"} last:border-none`}>
-            <span className="text-[10px] uppercase tracking-wider text-zinc-500 block font-mono">Notice Period</span>
-            <span className="text-sm sm:text-base font-bold text-emerald-500 font-mono">2 Months (Available)</span>
-          </div>
-          <div className={`pr-4 ${isDark ? "border-r border-zinc-800" : "border-r border-slate-200"} last:border-none`}>
-            <span className="text-[10px] uppercase tracking-wider text-zinc-500 block font-mono">Current Position</span>
-            <span className={`text-sm sm:text-base font-bold font-mono ${textTitleClass}`}>Lead Engineer</span>
-          </div>
-          <div className={`pr-4 ${isDark ? "border-r border-zinc-800" : "border-r border-slate-200"} last:border-none`}>
-            <span className="text-[10px] uppercase tracking-wider text-zinc-500 block font-mono">Primary Stack</span>
-            <span className="text-sm sm:text-base font-bold text-cyan-500 font-mono">Java, Python, Spring</span>
-          </div>
-          <div className="pr-4">
-            <span className="text-[10px] uppercase tracking-wider text-zinc-500 block font-mono">Location Status</span>
-            <span className={`text-sm sm:text-base font-bold font-mono ${textTitleClass}`}>Coimbatore (Open to Relocation)</span>
-          </div>
-        </div>
-      </section>
 
       {/* Main Hero & Profile */}
       <section id="about" className="max-w-6xl mx-auto px-6 pt-16 pb-12 w-full flex flex-col lg:flex-row items-center gap-12 print:pt-4">
