@@ -33,12 +33,18 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [showPhotoLightbox, setShowPhotoLightbox] = useState(false);
 
-  // basePath is determined at BUILD TIME from next.config.mjs (basePath: '/portfolio' in prod).
-  // Using a build-time constant instead of runtime window.hostname detection eliminates
-  // the incognito / fresh-load timing bug where the image briefly fired with basePath="".
-  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+  // basePath is derived at runtime from window.location.pathname.
+  // On GitHub Pages: pathname starts with /portfolio  → basePath = '/portfolio'
+  // On localhost:    pathname starts with /            → basePath = ''
+  // This is the same strategy used in TemplateClient — one source of truth, no NODE_ENV guessing.
+  const [basePath, setBasePath] = useState('');
 
   useEffect(() => {
+    // pathname on GH Pages: /portfolio or /portfolio/...
+    // Extract the leading segment if it matches the known repo name.
+    const seg = window.location.pathname.split('/')[1];
+    const resolvedBase = seg === 'portfolio' ? '/portfolio' : '';
+    setBasePath(resolvedBase);
     setMounted(true);
     setImgError(false);
     setData(resumeData);
@@ -348,14 +354,13 @@ export default function Home() {
           <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
             {mounted && !imgError ? (
               <div 
-                key={basePath}
                 onClick={() => setShowPhotoLightbox(true)}
                 className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none cursor-zoom-in hover:scale-105 transition-all duration-300"
               >
                 <img
                   src={profileThumbSrc}
                   alt={personal.name}
-                  onError={() => { if (mounted) setImgError(true); }}
+                  onError={() => setImgError(true)}
                   onContextMenu={(e) => e.preventDefault()}
                   onDragStart={(e) => e.preventDefault()}
                   className="h-full w-full object-cover object-top select-none pointer-events-none"

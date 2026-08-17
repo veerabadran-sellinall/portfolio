@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
+
+// DEPLOYMENT NOTES:
+// - GitHub Pages: CI uses actions/configure-pages@v5 (static_site_generator: next)
+//   which auto-injects basePath: '/portfolio' and assetPrefix: '/portfolio' at build time.
+//   Do NOT hardcode basePath here — it conflicts with the CI auto-injection.
+// - Local dev: no basePath needed (served at localhost:3000/).
+// - NEXT_PUBLIC_BASE_PATH is set by the CI environment so JS code can read it at runtime.
 
 const nextConfig = {
   output: 'export',
-  // On GitHub Pages the site lives at /portfolio — set basePath so
-  // Next.js correctly prefixes all routes and internal asset links.
-  // Local dev stays at / (no prefix) for convenience.
-  basePath: isProd ? '/portfolio' : '',
   images: {
     unoptimized: true,
   },
