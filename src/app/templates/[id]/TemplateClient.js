@@ -8,8 +8,10 @@ export default function TemplateClient({ id }) {
 
   const handleBackToSite = (e) => {
     e.preventDefault();
-    const base = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
-    window.location.href = base ? `https://veerabadran-sellinall.github.io${base}/` : '/';
+    // Navigate exactly 2 levels up from /[basePath]/templates/[id]
+    // → lands on /[basePath]/ on GitHub Pages, or / on localhost.
+    // This is fully independent of the profile-image basePath logic in page.js.
+    window.location.href = new URL('../..', window.location.href).href;
   };
 
   // Auto trigger browser print preview on load
