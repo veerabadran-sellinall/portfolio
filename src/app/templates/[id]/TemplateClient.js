@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import resumeData from "../../../data/resume.json";
 
 export default function TemplateClient({ id }) {
@@ -8,19 +8,17 @@ export default function TemplateClient({ id }) {
 
   const handleBackToSite = (e) => {
     e.preventDefault();
-    // Navigate exactly 2 levels up from /[basePath]/templates/[id]
-    // → lands on /[basePath]/ on GitHub Pages, or / on localhost.
-    // This is fully independent of the profile-image basePath logic in page.js.
-    window.location.href = new URL('../..', window.location.href).href;
+    // Find the part of the path before '/templates/' — that's our basePath (or '' on localhost).
+    // e.g. /portfolio/templates/classic → base='/portfolio' → go to https://host/portfolio/
+    //      /templates/classic          → base=''          → go to https://host/
+    const pathname = window.location.pathname;
+    const templatesIdx = pathname.indexOf('/templates/');
+    const base = templatesIdx !== -1 ? pathname.substring(0, templatesIdx) : '';
+    window.location.href = window.location.origin + base + '/';
   };
 
-  // Auto trigger browser print preview on load
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      window.print();
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  // Print is triggered only by the 'Print / Save PDF' button click — no auto-trigger.
+
 
   // 1. Classic corporate black and white style
   const renderClassic = () => (
