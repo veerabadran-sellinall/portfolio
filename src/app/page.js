@@ -319,20 +319,10 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Recruiter-focused structured bio */}
-          <div className="border-l-4 border-cyan-500 pl-4 py-1 space-y-2.5">
-            <p className={`leading-relaxed text-sm sm:text-base ${textMutedClass}`}>
-              \uD83D\uDE80 <strong className={textTitleClass}>5+ years</strong> driving product engineering at{" "}
-              <strong className={textTitleClass}>GRAAS</strong> — a leading e-commerce intelligence platform serving Southeast Asia. I lead a cross-functional engineering team, owning application stability, incident response, and automation across{" "}
-              <strong className={textTitleClass}>Shopee, Lazada, Zalora &amp; Shopify</strong> integrations.
-            </p>
-            <p className={`leading-relaxed text-sm sm:text-base ${textMutedClass}`}>
-              \uD83D\uDEE0 Core stack: <strong className={textSubtitleClass}>Java · Python · Spring Boot · SQL · MongoDB · RabbitMQ</strong>. I specialise in root cause analysis, automation scripting, and keeping distributed systems healthy under peak sales load.
-            </p>
-            <p className={`leading-relaxed text-sm sm:text-base ${textMutedClass}`}>
-              \u2705 Available with a <strong className="text-emerald-400 font-semibold">2-month notice</strong> · Based in Coimbatore · Open to on-site or hybrid roles across India.
-            </p>
-          </div>
+          {/* Bio — pulled from resume data, styled for clarity */}
+          <p className={`leading-relaxed text-sm sm:text-[15px] border-l-4 border-cyan-500 pl-4 py-1 ${textMutedClass}`}>
+            {personal.summary}
+          </p>
 
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs sm:text-sm font-mono pt-2 print:flex-col print:items-start">
             <div className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border ${badgeClass}`}>
