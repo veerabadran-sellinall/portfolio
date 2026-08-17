@@ -312,10 +312,10 @@ export default function Home() {
         <div className="flex-1 space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 font-bold text-xs font-mono">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Dynamic Recruiter Dashboard
+            Open to New Opportunities
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-emerald-500 to-teal-500">
               {personal.name}
             </span>
@@ -323,11 +323,39 @@ export default function Home() {
           <p className={`text-xl sm:text-2xl font-mono font-medium ${textSubtitleClass}`}>
             {personal.title}
           </p>
-          <p className={`${textMutedClass} max-w-2xl leading-relaxed text-sm sm:text-base`}>
-            {personal.summary}
-          </p>
 
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm font-mono pt-2 print:flex-col print:items-start">
+          {/* 4 recruiter highlight stat cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-2">
+            {[
+              { label: "Experience", value: "5+ Years", icon: "⚡", color: "text-cyan-400" },
+              { label: "Current Role", value: "Lead Engineer", icon: "\uD83D\uDC68\u200D\uD83D\uDCBB", color: "text-emerald-400" },
+              { label: "Notice Period", value: "2 Months", icon: "\uD83D\uDCC5", color: "text-amber-400" },
+              { label: "Location", value: "Open to Relocation", icon: "\uD83D\uDCCD", color: "text-violet-400" },
+            ].map((stat, i) => (
+              <div key={i} className={`${panelClass} rounded-xl p-3 text-center flex flex-col gap-1`}>
+                <span className="text-lg">{stat.icon}</span>
+                <span className={`text-xs font-bold font-mono ${stat.color}`}>{stat.value}</span>
+                <span className={`text-[10px] uppercase tracking-wider font-mono ${textMutedClass}`}>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Recruiter-focused structured bio */}
+          <div className="border-l-4 border-cyan-500 pl-4 py-1 space-y-2.5">
+            <p className={`leading-relaxed text-sm sm:text-base ${textMutedClass}`}>
+              \uD83D\uDE80 <strong className={textTitleClass}>5+ years</strong> driving product engineering at{" "}
+              <strong className={textTitleClass}>GRAAS</strong> — a leading e-commerce intelligence platform serving Southeast Asia. I lead a cross-functional engineering team, owning application stability, incident response, and automation across{" "}
+              <strong className={textTitleClass}>Shopee, Lazada, Zalora &amp; Shopify</strong> integrations.
+            </p>
+            <p className={`leading-relaxed text-sm sm:text-base ${textMutedClass}`}>
+              \uD83D\uDEE0 Core stack: <strong className={textSubtitleClass}>Java · Python · Spring Boot · SQL · MongoDB · RabbitMQ</strong>. I specialise in root cause analysis, automation scripting, and keeping distributed systems healthy under peak sales load.
+            </p>
+            <p className={`leading-relaxed text-sm sm:text-base ${textMutedClass}`}>
+              \u2705 Available with a <strong className="text-emerald-400 font-semibold">2-month notice</strong> · Based in Coimbatore · Open to on-site or hybrid roles across India.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs sm:text-sm font-mono pt-2 print:flex-col print:items-start">
             <div className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border ${badgeClass}`}>
               <svg className="h-4 w-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -346,16 +374,22 @@ export default function Home() {
               </svg>
               {personal.phone}
             </a>
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-colors ${badgeClass} hover:border-cyan-500/50`}>
+              <svg className="h-4 w-4 text-cyan-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
           </div>
         </div>
 
-        {/* Hero visual graphic representation */}
+        {/* Hero visual — profile card */}
         <div className="w-full lg:w-96 flex justify-center print:hidden">
-          <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
+          <div className={`relative w-80 h-auto rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 gap-4 animate-float`}>
             {mounted && !imgError ? (
-              <div 
+              <div
                 onClick={() => setShowPhotoLightbox(true)}
-                className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none cursor-zoom-in hover:scale-105 transition-all duration-300"
+                className="h-36 w-36 rounded-2xl overflow-hidden border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none cursor-zoom-in hover:scale-105 transition-all duration-300"
               >
                 <img
                   src={profileThumbSrc}
@@ -367,14 +401,21 @@ export default function Home() {
                 />
               </div>
             ) : (
-              <div className="h-28 w-28 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 text-4xl font-mono font-extrabold mb-6 shadow-lg select-none">
+              <div className="h-36 w-36 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 text-4xl font-mono font-extrabold shadow-lg select-none">
                 VV
               </div>
             )}
-            <h3 className={`text-xl font-bold tracking-wide ${textTitleClass}`}>{personal.name}</h3>
-            <p className={`text-xs font-mono mt-1 ${textSubtitleClass}`}>Lead Engineer | Tech Innovator</p>
-            <div className="flex gap-2.5 mt-6 flex-wrap justify-center">
-              {["Java", "Python", "Spring Boot", "SQL"].map((lang, lIdx) => (
+            <div className="text-center space-y-1">
+              <h3 className={`text-xl font-bold tracking-wide ${textTitleClass}`}>{personal.name}</h3>
+              <p className={`text-xs font-mono ${textSubtitleClass}`}>Lead Engineer · GRAAS</p>
+              <p className={`text-[10px] font-mono ${textMutedClass}`}>Coimbatore, India</p>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-bold">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Available · 2 Month Notice
+            </div>
+            <div className="flex gap-2 flex-wrap justify-center">
+              {["Java", "Python", "Spring Boot", "RabbitMQ"].map((lang, lIdx) => (
                 <span key={lIdx} className={`text-[10px] px-2.5 py-1 rounded-md font-mono ${badgeClass}`}>
                   {lang}
                 </span>
