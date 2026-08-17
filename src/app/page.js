@@ -319,10 +319,40 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Bio — pulled from resume data, styled for clarity */}
-          <p className={`leading-relaxed text-sm sm:text-[15px] border-l-4 border-cyan-500 pl-4 py-1 ${textMutedClass}`}>
-            {personal.summary}
-          </p>
+          {/* Recruiter-focused impressive bio — structured for clear visibility */}
+          <div className="space-y-4 text-sm sm:text-base leading-relaxed">
+            <p className={`${textMutedClass}`}>
+              🚀 <strong className={textTitleClass}>5+ Years of Lead Engineering Experience</strong> driving application stability, debugging, and system uptime at <strong className={textTitleClass}>GRAAS</strong> (a premier e-commerce intelligence platform).
+            </p>
+            <p className={`${textMutedClass}`}>
+              🛠️ <strong className={textTitleClass}>Core Expertise:</strong> Hands-on application support, troubleshooting software bugs, and managing database indexing & query optimization. I possess in-depth domain knowledge of major marketplaces, implementing updates for <strong className={textSubtitleClass}>Shopee, Lazada, Zalora, and Shopify APIs</strong>.
+            </p>
+            <p className={`${textMutedClass}`}>
+              ✅ <strong className={textTitleClass}>Operational Impact:</strong> Leading engineering teams, automating support flows, managing inventory tracking, and providing critical database/system support during high-traffic peak sales days.
+            </p>
+          </div>
+
+          {/* Core Competencies Visual Tags */}
+          <div className="space-y-2 pt-2 text-left">
+            <span className={`text-[10px] uppercase tracking-wider font-mono block ${textSubtitleClass}`}>Key Professional Pillars</span>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { label: "Inventory Management", icon: "📦" },
+                { label: "Database Indexing & Queries", icon: "📊" },
+                { label: "Marketplace API Updates", icon: "🔌" },
+                { label: "Peak Sales Day Support", icon: "🔥" },
+                { label: "Troubleshooting & Bug Fixing", icon: "🔍" }
+              ].map((pill, idx) => (
+                <span
+                  key={idx}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold transition-all ${badgeClass} hover:border-cyan-500/30`}
+                >
+                  <span>{pill.icon}</span>
+                  <span className={textTitleClass}>{pill.label}</span>
+                </span>
+              ))}
+            </div>
+          </div>
 
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-xs sm:text-sm font-mono pt-2 print:flex-col print:items-start">
             <div className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border ${badgeClass}`}>
