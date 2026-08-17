@@ -238,7 +238,7 @@ export default function Home() {
 
       {/* Navigation Header */}
       <header className={`sticky top-0 z-50 ${headerClass} px-6 py-4 print:hidden`}>
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="max-w-[1360px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center font-mono font-bold text-slate-950 shadow-md">
               VV
@@ -248,7 +248,7 @@ export default function Home() {
               <span className="text-xs text-cyan-500 font-mono">Lead Engineer Portfolio</span>
             </div>
           </div>
-          <nav className="flex items-center gap-5 text-xs sm:text-sm font-mono text-zinc-400">
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs sm:text-sm font-mono text-zinc-400">
             <a href="#about" className={`hover:text-cyan-500 transition-colors ${!isDark && "text-slate-600"}`}>About</a>
             <a href="#fit-check" className="hover:text-cyan-500 text-cyan-500/90 font-semibold transition-colors">FAQ</a>
             <a href="#experience" className={`hover:text-cyan-500 transition-colors ${!isDark && "text-slate-600"}`}>Experience</a>
@@ -287,7 +287,7 @@ export default function Home() {
 
 
       {/* Main Hero & Profile */}
-      <section id="about" className="max-w-6xl mx-auto px-6 pt-16 pb-12 w-full flex flex-col lg:flex-row items-center gap-12 print:pt-4">
+      <section id="about" className="max-w-[1360px] mx-auto px-6 pt-16 pb-12 w-full flex flex-col lg:flex-row items-center gap-12 print:pt-4">
         <div className="flex-1 space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 font-bold text-xs font-mono">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -333,9 +333,9 @@ export default function Home() {
           </div>
 
           {/* Core Competencies Visual Tags */}
-          <div className="space-y-2 pt-2 text-left">
+          <div className="space-y-2 pt-2 text-center lg:text-left">
             <span className={`text-[10px] uppercase tracking-wider font-mono block ${textSubtitleClass}`}>Key Professional Pillars</span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2">
               {[
                 { label: "Inventory Management", icon: "📦" },
                 { label: "Database Indexing & Queries", icon: "📊" },
@@ -425,7 +425,7 @@ export default function Home() {
       </section>
 
       {/* Recruiter Screening Q&A */}
-      <section id="fit-check" className="max-w-6xl mx-auto px-6 py-12 w-full print:hidden">
+      <section id="fit-check" className="max-w-[1360px] mx-auto px-6 py-12 w-full print:hidden">
         <div className={`rounded-2xl p-6 sm:p-8 border ${isDark ? "border-cyan-500/10 bg-gradient-to-r from-cyan-950/20 to-emerald-950/10" : "border-slate-200 bg-slate-50"}`}>
           <h2 className={`text-xl sm:text-2xl font-bold mb-2 flex items-center gap-2 ${textTitleClass}`}>
             <svg className="h-6 w-6 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -466,7 +466,7 @@ export default function Home() {
       </section>
 
       {/* Work Experience Section */}
-      <section id="experience" className="max-w-6xl mx-auto px-6 py-12 w-full page-break-before">
+      <section id="experience" className="max-w-[1360px] mx-auto px-6 py-12 w-full page-break-before">
         <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight mb-8 flex items-center gap-3 ${textTitleClass}`}>
           <span className="h-8 w-1 rounded bg-cyan-500"></span>
           Professional Experience
@@ -535,7 +535,7 @@ export default function Home() {
       </section>
 
       {/* Skills Interactive Dashboard */}
-      <section id="skills" className="max-w-6xl mx-auto px-6 py-12 w-full">
+      <section id="skills" className="max-w-[1360px] mx-auto px-6 py-12 w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-8">
           <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3 ${textTitleClass}`}>
             <span className="h-8 w-1 rounded bg-cyan-500"></span>
@@ -602,7 +602,7 @@ export default function Home() {
       </section>
 
       {/* Education & Language Grid */}
-      <div id="education" className="max-w-6xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-8 page-break-before">
+      <div id="education" className="max-w-[1360px] mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-8 page-break-before">
         {/* Education Section */}
         <section className="lg:col-span-2 space-y-6">
           <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3 ${textTitleClass}`}>
@@ -679,7 +679,7 @@ export default function Home() {
       </div>
 
       {/* Interactive Sandbox Console */}
-      <section id="terminal" className="max-w-6xl mx-auto px-6 py-12 w-full print:hidden">
+      <section id="terminal" className="max-w-[1360px] mx-auto px-6 py-12 w-full print:hidden">
         <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight mb-6 flex items-center gap-3 ${textTitleClass}`}>
           <span className="h-8 w-1 rounded bg-cyan-500"></span>
           Interactive Query Console
@@ -735,7 +735,7 @@ export default function Home() {
       </section>
 
       {/* Recruiter Message Console */}
-      <section id="contact" className="max-w-4xl mx-auto px-6 py-12 w-full print:hidden">
+      <section id="contact" className="max-w-[1100px] mx-auto px-6 py-12 w-full print:hidden">
         <div className={`${panelClass} rounded-3xl p-6 sm:p-10 relative overflow-hidden`}>
           <div className="text-center space-y-2 mb-8">
             <h2 className={`text-2xl sm:text-3xl font-bold ${textTitleClass}`}>Direct Message Console</h2>
