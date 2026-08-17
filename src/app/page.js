@@ -354,13 +354,14 @@ export default function Home() {
           <div className={`relative w-80 h-80 rounded-2xl overflow-hidden ${panelClass} flex flex-col items-center justify-center p-8 animate-float`}>
             {mounted && !imgError ? (
               <div 
+                key={basePath}
                 onClick={() => setShowPhotoLightbox(true)}
                 className="h-32 w-32 rounded-2xl overflow-hidden mb-6 border-2 border-cyan-500/50 shadow-lg bg-zinc-800 select-none cursor-zoom-in hover:scale-105 transition-all duration-300"
               >
                 <img
                   src={profileThumbSrc}
                   alt={personal.name}
-                  onError={() => setImgError(true)}
+                  onError={() => { if (mounted) setImgError(true); }}
                   onContextMenu={(e) => e.preventDefault()}
                   onDragStart={(e) => e.preventDefault()}
                   className="h-full w-full object-cover object-top select-none pointer-events-none"
@@ -562,7 +563,7 @@ export default function Home() {
       </section>
 
       {/* Education & Language Grid */}
-      <div className="max-w-6xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-8 page-break-before">
+      <div id="education" className="max-w-6xl mx-auto px-6 py-12 w-full grid grid-cols-1 lg:grid-cols-3 gap-8 page-break-before">
         {/* Education Section */}
         <section className="lg:col-span-2 space-y-6">
           <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3 ${textTitleClass}`}>
