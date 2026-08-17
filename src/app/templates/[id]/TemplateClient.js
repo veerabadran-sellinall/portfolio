@@ -8,10 +8,8 @@ export default function TemplateClient({ id }) {
 
   const handleBackToSite = (e) => {
     e.preventDefault();
-    const isGithubPages = typeof window !== "undefined" && window.location.hostname.includes("github.io");
-    window.location.href = isGithubPages
-      ? "https://veerabadran-sellinall.github.io/portfolio/"
-      : "/";
+    const base = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
+    window.location.href = base ? `https://veerabadran-sellinall.github.io${base}/` : '/';
   };
 
   // Auto trigger browser print preview on load

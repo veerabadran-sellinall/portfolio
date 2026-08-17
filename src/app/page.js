@@ -33,18 +33,12 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [showPhotoLightbox, setShowPhotoLightbox] = useState(false);
 
-  // basePath is resolved ONLY on the client inside useEffect to avoid SSR race conditions.
-  // During SSR window is undefined so basePath starts as "" which would produce wrong paths.
-  const [basePath, setBasePath] = useState("");
+  // basePath is determined at BUILD TIME from next.config.mjs (basePath: '/portfolio' in prod).
+  // Using a build-time constant instead of runtime window.hostname detection eliminates
+  // the incognito / fresh-load timing bug where the image briefly fired with basePath="".
+  const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : '';
 
-  // All state is resolved synchronously in one useEffect batch after client hydration.
-  // resumeData is a local JSON import (already in memory) so no async delay is needed.
-  // Batching all setState calls together means React does a single re-render with the
-  // correct basePath, mounted=true, and data — eliminating any timing window where
-  // basePath="" while mounted=true could cause a wrong image path to fire.
   useEffect(() => {
-    const resolvedBase = window.location.hostname.includes("github.io") ? "/portfolio" : "";
-    setBasePath(resolvedBase);
     setMounted(true);
     setImgError(false);
     setData(resumeData);
